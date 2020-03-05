@@ -1,13 +1,17 @@
-#!/bin/sh
-count=0
-sum=0
-while [ -n "$1" ]
+#!/bin/bash
+
+for (( a = 0; a < 150; a++ ))
 do
-sum=$[$sum+$1]
-count=$[ $count + 1 ]
-shift
-done
-echo $count
-echo $sum
-let "ret=sum / count"
-echo $ret 
+    echo $RANDOM
+done > numbers.txt
+
+let average=0
+let cnt=0
+
+while IFS= read -r number;
+do
+    average=$((average + $number))
+    cnt=$((cnt + 1))
+done < numbers.txt
+echo $cnt
+echo $((average / cnt))
